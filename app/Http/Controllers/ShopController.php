@@ -19,8 +19,9 @@ class ShopController extends Controller
 
     public function products() {
         $products = Product::all();
-
-        return view('shop.products');
+        return view('shop.products', [
+            'products' => $products
+        ]);
     }
 
     public function cart() {
