@@ -6,6 +6,11 @@
 
 @section('content')
 <div>
-    Product details
+    <h2>{{$product['name']}}</h2>
+    <p>Description: {{$product['description']}}</p>
+    <p>Price: {{$product['price']}}</p>
+    <p>Retail Price: {{$product['retail_price']}}</p>
+    <p>Quantity: {{$product['quantity']}}</p>
+    <p>Date Added: {{$product['date_added']}}</p>
 </div>
 @endsection

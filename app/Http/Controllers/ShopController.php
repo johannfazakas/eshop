@@ -28,7 +28,8 @@ class ShopController extends Controller
         return view('shop.cart');
     }
 
-    public function product() {
-        return view('shop.product');
+    public function product($id) {
+        $product = Product::find($id);
+        return view('shop.product', ['product' => $product]);
     }
 }
