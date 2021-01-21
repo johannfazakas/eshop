@@ -39,4 +39,9 @@ Route::prefix('/shop')->group(function () {
         'uses' => 'App\Http\Controllers\ShopController@product',
         'as' => 'shop.product'
     ]);
+
+    Route::post('/addToCart', [
+        'uses' => 'App\Http\Controllers\ShopController@addToCart',
+        'as' => 'shop.addToCart'
+    ]);
 });

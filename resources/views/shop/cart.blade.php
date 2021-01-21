@@ -6,6 +6,15 @@
 
 @section('content')
 <div>
-    Cart Content
+  {{ $message }}
+    <h1>Products in cart:</h1>
+    <hr>
+    @foreach($cartProducts as $product)
+    <div>
+        <h2>{{$product['name']}}</h2>
+        <p>Quantity: {{$product['quantity']}}</p>
+        <hr>
+    </div>
+    @endforeach
 </div>
 @endsection
