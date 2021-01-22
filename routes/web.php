@@ -45,3 +45,5 @@ Route::prefix('/shop')->group(function () {
         'as' => 'shop.addToCart'
     ]);
 });
+
+Auth::routes();
