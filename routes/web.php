@@ -35,6 +35,11 @@ Route::prefix('/shop')->group(function () {
         'as' => 'shop.cart'
     ]);
 
+    Route::get('/orders', [
+        'uses' => 'App\Http\Controllers\ShopController@orders',
+        'as' => 'shop.orders'
+    ]);
+
     Route::get('/product/{id}', [
         'uses' => 'App\Http\Controllers\ShopController@product',
         'as' => 'shop.product'
@@ -53,6 +58,11 @@ Route::prefix('/shop')->group(function () {
     Route::get('/delete/{id}', [
         'uses' => 'App\Http\Controllers\ShopController@delete',
         'as' => 'shop.delete'
+    ]);
+
+    Route::get('/placeOrder', [
+        'uses' => 'App\Http\Controllers\ShopController@placeOrder',
+        'as' => 'shop.placeOrder'
     ]);
 
     Route::post('/addToCart', [

@@ -16,6 +16,7 @@
                 @csrf
             </form>
         </li>
+        <li><a href="{{ route('shop.orders') }}">Orders</a></li>
         @endif
     </ul>
 </div>

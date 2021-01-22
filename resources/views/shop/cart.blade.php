@@ -14,6 +14,8 @@
         <p>Quantity: {{$product['quantity']}}</p>
         <hr>
     </div>
+    <a href="{{ route('shop.placeOrder') }}">Place order</a>
+
     @endforeach
 </div>
 @endsection

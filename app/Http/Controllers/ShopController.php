@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use App\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -69,9 +71,15 @@ class ShopController extends Controller
         return redirect()->route('shop.products')->with('info', 'Product deleted');
     }
 
+    public function orders()
+    {
+        # TODO johann change this
+        $user = User::where('email', 'johann@mail.com')->first();
+        return view('shop.orders', ['orders' => $user->orders]);
+    }
+
     public function addToCart(Store $session, Request $request): RedirectResponse
     {
-
         $this->validate($request, [
             'id' => 'required',
             'quantity' => ['required', 'gt:0']
@@ -88,7 +96,29 @@ class ShopController extends Controller
         $session->put('cart', $cart);
         array_push($cart, ['id' => $request->input('id'), 'quantity' => $request->input('quantity')]);
 
-        return redirect()->route('shop.cart');
+        return redirect()->route('shop.cart')->with('info', 'Added to Card');
+    }
+
+    public function placeOrder(Store $session): RedirectResponse
+    {
+        $cart = $session->get('cart', []);
+        $totalPrice = 0.0;
+        foreach ($cart as $id => $quantity) {
+            $product = Product::find($id);
+            $product->quantity = $product->quantity - $quantity;
+            $product->save();
+            $totalPrice = $totalPrice + $quantity * $product->price;
+        }
+        // TODO johann change hardcoded user id
+        $user = User::where('email', 'johann@mail.com')->first();
+        $order = new Order([
+            'total_price' => $totalPrice,
+            'user_id' => $user->id
+        ]);
+        $order->save();
+        $session->put('cart', []);
+
+        return redirect()->route('shop.products')->with('info', 'Order added');
     }
 
     public function createProduct(Request $request): RedirectResponse
