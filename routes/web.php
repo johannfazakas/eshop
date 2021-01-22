@@ -18,6 +18,34 @@ Route::get('/', function () {
 
 });
 
+Route::prefix('/admin')->middleware('admin')->group(function () {
+
+    Route::get('/create', [
+        'uses' => 'App\Http\Controllers\AdminController@create',
+        'as' => 'admin.create'
+    ]);
+
+    Route::get('/update/{id}', [
+        'uses' => 'App\Http\Controllers\AdminController@update',
+        'as' => 'admin.update'
+    ]);
+
+    Route::get('/delete/{id}', [
+        'uses' => 'App\Http\Controllers\AdminController@delete',
+        'as' => 'admin.delete'
+    ]);
+
+    Route::post('/createProduct', [
+        'uses' => 'App\Http\Controllers\AdminController@createProduct',
+        'as' => 'admin.createProduct'
+    ]);
+
+    Route::post('/updateProduct', [
+        'uses' => 'App\Http\Controllers\AdminController@updateProduct',
+        'as' => 'admin.updateProduct'
+    ]);
+});
+
 Route::prefix('/shop')->group(function () {
 
     Route::get('/home', [
@@ -49,24 +77,6 @@ Route::prefix('/shop')->group(function () {
         'middleware' => 'auth'
     ]);
 
-    Route::get('/create', [
-        'uses' => 'App\Http\Controllers\ShopController@create',
-        'as' => 'shop.create',
-        'middleware' => 'admin'
-    ]);
-
-    Route::get('/update/{id}', [
-        'uses' => 'App\Http\Controllers\ShopController@update',
-        'as' => 'shop.update',
-        'middleware' => 'auth'
-    ]);
-
-    Route::get('/delete/{id}', [
-        'uses' => 'App\Http\Controllers\ShopController@delete',
-        'as' => 'shop.delete',
-        'middleware' => 'auth'
-    ]);
-
     Route::get('/placeOrder', [
         'uses' => 'App\Http\Controllers\ShopController@placeOrder',
         'as' => 'shop.placeOrder',
@@ -79,17 +89,6 @@ Route::prefix('/shop')->group(function () {
         'middleware' => 'auth'
     ]);
 
-    Route::post('/createProduct', [
-        'uses' => 'App\Http\Controllers\ShopController@createProduct',
-        'as' => 'shop.createProduct',
-        'middleware' => 'admin'
-    ]);
-
-    Route::post('/updateProduct', [
-        'uses' => 'App\Http\Controllers\ShopController@updateProduct',
-        'as' => 'shop.updateProduct',
-        'middleware' => 'auth'
-    ]);
 
 });
 

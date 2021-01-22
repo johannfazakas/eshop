@@ -7,7 +7,7 @@
 @section('content')
 <div>
     @include('partials.errors')
-    <form action="{{ route('shop.createProduct') }}" method="post">
+    <form action="{{ route('admin.createProduct') }}" method="post">
         @csrf
         Product name: <input type="text" name="name"><br>
         Description: <input type="text" name="description"><br>

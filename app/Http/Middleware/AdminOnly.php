@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,15 +18,14 @@ class AdminOnly
      */
     public function handle(Request $request, Closure $next)
     {
-//        return redirect('/');
-        if (!Auth::check() || !Auth::user()->is_admin) {
-            return redirect()->back();
+        if (!Auth::check()) {
+            return redirect()->route('shop.home');
         }
-//        $userId = Auth::id();
-//        $user = User::find($userId);
-//        if (!$user->email == "admin@mail.com") {
-//            return redirect()->back();
-//        }
+        $userId = Auth::id();
+        $user = User::find($userId);
+        if (!$user->is_admin) {
+            return redirect()->route('shop.home');
+        }
         return $next($request);
     }
 }
