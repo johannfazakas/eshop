@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
@@ -16,14 +17,14 @@ class UserTableSeeder extends Seeder
         $user = new \App\Models\User([
             'name' => 'johann',
             'email' => 'johann@mail.com',
-            'password' => 'secret123'
+            'password' => Hash::make('secret123'),
         ]);
         $user->save();
 
         $user = new \App\Models\User([
             'name' => 'admin',
             'email' => 'admin@mail.com',
-            'password' => 'secret123',
+            'password' => Hash::make('secret123'),
             'is_admin' => true
         ]);
         $user->save();
