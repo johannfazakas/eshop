@@ -45,6 +45,11 @@ Route::prefix('/shop')->group(function () {
         'as' => 'shop.create'
     ]);
 
+    Route::get('/update/{id}', [
+        'uses' => 'App\Http\Controllers\ShopController@update',
+        'as' => 'shop.update'
+    ]);
+
     Route::post('/addToCart', [
         'uses' => 'App\Http\Controllers\ShopController@addToCart',
         'as' => 'shop.addToCart'
@@ -53,6 +58,11 @@ Route::prefix('/shop')->group(function () {
     Route::post('/createProduct', [
         'uses' => 'App\Http\Controllers\ShopController@createProduct',
         'as' => 'shop.createProduct'
+    ]);
+
+    Route::post('/updateProduct', [
+        'uses' => 'App\Http\Controllers\ShopController@updateProduct',
+        'as' => 'shop.updateProduct'
     ]);
 });
 

@@ -55,6 +55,12 @@ class ShopController extends Controller
         return view('shop.create');
     }
 
+    public function update($id)
+    {
+        $product = Product::find($id);
+        return view('shop.update', ['product' => $product]);
+    }
+
     public function addToCart(Store $session, Request $request): RedirectResponse
     {
 
@@ -79,9 +85,8 @@ class ShopController extends Controller
 
     public function createProduct(Request $request): RedirectResponse
     {
-
         $this->validate($request, [
-           'name' => 'required',
+            'name' => 'required',
             'description' => 'required',
             'price' => ['required', 'gt:0'],
             'quantity' => ['required', 'gt:0']
@@ -92,6 +97,24 @@ class ShopController extends Controller
             'price' => $request->input('price'),
             'quantity' => $request->input('quantity')
         ]);
+        $product->save();
+
+        return redirect()->route('shop.products');
+    }
+
+    public function updateProduct(Request $request): RedirectResponse
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'price' => ['required', 'gt:0'],
+            'quantity' => ['required', 'gt:0']
+        ]);
+        $product = Product::find($request->input('id'));
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->quantity = $request->input('quantity');
         $product->save();
 
         return redirect()->route('shop.products');
