@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use Illuminate\Session\Store;
@@ -74,8 +75,8 @@ class ShopController extends Controller
 
     public function orders()
     {
-        # TODO johann change this
-        $user = User::where('email', 'johann@mail.com')->first();
+        $userId = Auth::id();
+        $user = User::find($userId);
         return view('shop.orders', ['orders' => $user->orders]);
     }
 
@@ -111,7 +112,8 @@ class ShopController extends Controller
             $totalPrice = $totalPrice + $quantity * $product->price;
         }
         // TODO johann change hardcoded user id
-        $user = User::where('email', 'johann@mail.com')->first();
+        $userId = Auth::id();
+        $user = User::find($userId);
         $order = new Order([
             'total_price' => $totalPrice,
             'user_id' => $user->id
