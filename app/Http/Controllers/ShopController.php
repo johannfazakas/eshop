@@ -119,4 +119,12 @@ class ShopController extends Controller
 
         return redirect()->route('shop.products');
     }
+
+    public function deleteProduct(Request $request): RedirectResponse
+    {
+        $product = Product::find($request->input('id'));
+        $product->delete();
+
+        return redirect()->route('shop.products');
+    }
 }

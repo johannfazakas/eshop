@@ -64,6 +64,11 @@ Route::prefix('/shop')->group(function () {
         'uses' => 'App\Http\Controllers\ShopController@updateProduct',
         'as' => 'shop.updateProduct'
     ]);
+
+    Route::post('/deleteProduct', [
+        'uses' => 'App\Http\Controllers\ShopController@deleteProduct',
+        'as' => 'shop.deleteProduct'
+    ]);
 });
 
 Auth::routes();
