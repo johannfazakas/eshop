@@ -12,7 +12,7 @@
     <div>
         <h2>{{$product->name}}</h2>
         <p>Price: {{$product->price}}</p>
-        <p>Date added: {{$product->create_at}}</p>
+        <p>Date added: {{$product->created_at}}</p>
         <a href="{{ route('shop.product', ['id' => $product->id]) }}">view</a>
         <hr>
     </div>
