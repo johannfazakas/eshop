@@ -21,11 +21,12 @@ class ShopController extends Controller
             'products' => $latest_products]);
     }
 
-    public function products()
+    public function products(Store $session)
     {
         $products = Product::all();
         return view('shop.products', [
-            'products' => $products
+            'products' => $products,
+            'info' => $session->get('info', '')
         ]);
     }
 
