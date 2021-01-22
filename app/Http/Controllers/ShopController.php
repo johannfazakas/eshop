@@ -61,6 +61,14 @@ class ShopController extends Controller
         return view('shop.update', ['product' => $product]);
     }
 
+    public function delete($id): RedirectResponse
+    {
+        $product = Product::find($id);
+        $product->delete();
+
+        return redirect()->route('shop.products')->with('info', 'Product deleted');
+    }
+
     public function addToCart(Store $session, Request $request): RedirectResponse
     {
 
@@ -99,7 +107,7 @@ class ShopController extends Controller
         ]);
         $product->save();
 
-        return redirect()->route('shop.products');
+        return redirect()->route('shop.products')->with('info', 'Product created');
     }
 
     public function updateProduct(Request $request): RedirectResponse
@@ -117,14 +125,7 @@ class ShopController extends Controller
         $product->quantity = $request->input('quantity');
         $product->save();
 
-        return redirect()->route('shop.products');
+        return redirect()->route('shop.products')->with('info', 'Product updated');
     }
 
-    public function deleteProduct(Request $request): RedirectResponse
-    {
-        $product = Product::find($request->input('id'));
-        $product->delete();
-
-        return redirect()->route('shop.products');
-    }
 }

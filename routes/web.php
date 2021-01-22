@@ -50,6 +50,11 @@ Route::prefix('/shop')->group(function () {
         'as' => 'shop.update'
     ]);
 
+    Route::get('/delete/{id}', [
+        'uses' => 'App\Http\Controllers\ShopController@delete',
+        'as' => 'shop.delete'
+    ]);
+
     Route::post('/addToCart', [
         'uses' => 'App\Http\Controllers\ShopController@addToCart',
         'as' => 'shop.addToCart'
@@ -65,10 +70,6 @@ Route::prefix('/shop')->group(function () {
         'as' => 'shop.updateProduct'
     ]);
 
-    Route::post('/deleteProduct', [
-        'uses' => 'App\Http\Controllers\ShopController@deleteProduct',
-        'as' => 'shop.deleteProduct'
-    ]);
 });
 
 Auth::routes();
