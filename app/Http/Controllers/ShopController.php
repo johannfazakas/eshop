@@ -25,7 +25,7 @@ class ShopController extends Controller
     }
 
     public function cart(Store $session) {
-        $cart = $session->get('cart');
+        $cart = $session->get('cart', []);
         $cartProducts= [];
         foreach ($cart as $id => $quantity) {
             $product = Product::find($id);
@@ -36,7 +36,6 @@ class ShopController extends Controller
             ]);
         }
         return view('shop.cart', [
-            'message' => "got redirected " . print_r($session->get('cart')),
             'cartProducts' => $cartProducts
         ]);
     }
@@ -47,10 +46,12 @@ class ShopController extends Controller
     }
 
     public function addToCart(Store $session, Request $request) {
+
         $this->validate($request, [
             'id' => 'required',
             'quantity' => ['required', 'gt:0']
         ]);
+
         $id = $request->input('id');
         $quantity = $request->input('quantity');
         $cart = $session->get('cart', []);
@@ -61,6 +62,7 @@ class ShopController extends Controller
         }
         $session->put('cart', $cart);
         array_push($cart, ['id' => $request->input('id'), 'quantity' => $request->input('quantity')]);
+
         return redirect()->route('shop.cart');
     }
 }
