@@ -7,11 +7,11 @@
 @section('content')
 <div>
     @include('partials.errors')
-    <h2>{{$product['name']}}</h2>
-    <p>Description: {{$product['description']}}</p>
-    <p>Price: {{$product['price']}}</p>
-    <p>Quantity: {{$product['quantity']}}</p>
-    <p>Date Added: {{$product['created_at']}}</p>
+    <h2>{{$product->name}}</h2>
+    <p>Description: {{$product->description}}</p>
+    <p>Price: {{$product->price}}</p>
+    <p>Quantity: {{$product->quantity}}</p>
+    <p>Date Added: {{$product->quantity}}</p>
     <form action="{{ route('shop.addToCart') }}" method="POST">
         @csrf
         <label>Quantity: </label><input type="number" name="quantity">

@@ -10,9 +10,9 @@
     <hr>
     @foreach($products as $product)
     <div>
-        <h2>{{$product['name']}}</h2>
-        <p>Price: {{$product['price']}}</p>
-        <p>Date added: {{$product['date_added']}}</p>
+        <h2>{{$product->name}}</h2>
+        <p>Price: {{$product->price}}</p>
+        <p>Date added: {{$product->create_at}}</p>
         <a href="{{ route('shop.product', ['id' => $product->id]) }}">view</a>
         <hr>
     </div>

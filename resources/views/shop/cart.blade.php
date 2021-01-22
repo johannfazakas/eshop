@@ -10,8 +10,8 @@
     <hr>
     @foreach($cartProducts as $product)
     <div>
-        <h2>{{$product['name']}}</h2>
-        <p>Quantity: {{$product['quantity']}}</p>
+        <h2>{{$product->name}}</h2>
+        <p>Quantity: {{$product->quantity}}</p>
         <hr>
     </div>
     @endforeach

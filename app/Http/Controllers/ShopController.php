@@ -35,7 +35,7 @@ class ShopController extends Controller
             $product = Product::find($id);
             array_push($cartProducts, [
                 'id' => $id,
-                'name' => $product['name'],
+                'name' => $product->name,
                 'quantity' => $quantity
             ]);
         }
