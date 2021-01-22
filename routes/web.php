@@ -52,7 +52,7 @@ Route::prefix('/shop')->group(function () {
     Route::get('/create', [
         'uses' => 'App\Http\Controllers\ShopController@create',
         'as' => 'shop.create',
-        'middleware' => 'auth'
+        'middleware' => 'admin'
     ]);
 
     Route::get('/update/{id}', [
@@ -82,7 +82,7 @@ Route::prefix('/shop')->group(function () {
     Route::post('/createProduct', [
         'uses' => 'App\Http\Controllers\ShopController@createProduct',
         'as' => 'shop.createProduct',
-        'middleware' => 'auth'
+        'middleware' => 'admin'
     ]);
 
     Route::post('/updateProduct', [
