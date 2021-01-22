@@ -6,6 +6,7 @@
 
 @section('content')
 <div>
+    @include('partials.info', ['info' => $info ?? ''])
     <a href="{{ route('shop.create') }}">Create new product</a>
     <h1>Products:</h1>
     @foreach($products as $product)
