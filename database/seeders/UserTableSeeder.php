@@ -23,7 +23,8 @@ class UserTableSeeder extends Seeder
         $user = new \App\Models\User([
             'name' => 'admin',
             'email' => 'admin@mail.com',
-            'password' => 'secret123'
+            'password' => 'secret123',
+            'is_admin' => true
         ]);
         $user->save();
     }
